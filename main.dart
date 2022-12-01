@@ -54,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isvisble = true;
   var data;
   String output = '';
+  var p;
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -102,8 +103,27 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               child: ElevatedButton(
                 onPressed: () async {
-                  String v = 'gopal';
+                  List<String> countries = [
+                    "Canada",
+                    "Brazil",
+                    "USA",
+                    "Japan",
+                    "China",
+                    "UK",
+                    "Uganda",
+                    "Uruguay"
+                  ];
+
+                  String v = countries[5];
                   data = await fetchdata(input, v);
+                  //Data having two values first score is
+                  //by fuzzy ratio having max value -100
+                  //this is first        // represented by data['results']
+                  //another score is by soundex which having 0 as correct score
+                  // this secondscore         //represented by data['Answer']
+                  //  condition if first score is 100 and second score is 0 then string is prefectly maching
+
+                  p = data['results'];
 
                   setState(() {
                     isvisble = true;
@@ -122,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(border: Border.all(width: 1)),
                   child: Text(
-                    'ans is :$data',
+                    'ans is :$p',
                     style: TextStyle(color: Colors.blue, fontSize: 20),
                   ),
                 )),
