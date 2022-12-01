@@ -2,19 +2,17 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:nlp/API.dart';
 
-Future<String> fetchdata(String user, String ans ) async {
-  http.Response response =
-      await http.get(Uri.parse('https://myapies.herokuapp.com/?user=$user&standard=$ans'));
-      
+Future<Map> fetchdata(String user, String ans) async {
+  http.Response response = await http
+      .get(Uri.parse('https://myapi.herokuapp.com/?user=$user&standard=$ans'));
 
-  Map<String,dynamic> data = jsonDecode(response.body);
+  Map<String, dynamic> data = jsonDecode(response.body);
   if (response.statusCode == 200) {
-    if (data['results'] != null) { 
-      return data['results'];
-      
+    if (data['results'] != null) {
+      return data;
     }
-    return "asddaghgsdd";
+    return data;
   } else {
-    return "kiran";
+    return data;
   }
 }
